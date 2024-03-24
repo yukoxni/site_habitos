@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h2>Login</h2>
+    {% if erro %}
+        <p>{{ erro }}</p>
+    {% endif %}
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <div class="input-group">
+            <div class="input-box">
+                <label for="email">E-mail</label>
+                <input id="email" type="email" name="email" placeholder="Digite seu e-mail" required>
+            </div>
+            <div class="input-box">
+                <label for="password">Senha</label>
+                <input id="password" type="password" name="password" placeholder="Digite sua senha" required>
+            </div>
+        </div>
+        <button type="submit"><a href="{% url 'habitos' %}">Entrar</a></button>
+    </form>
+</body>
+</html>
