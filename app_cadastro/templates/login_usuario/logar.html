@@ -1,28 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <link rel="stylesheet" href="/static/assets/css/style.css">
+    <title>Formulário</title>
 </head>
+
 <body>
-    <h2>Login</h2>
-    {% if erro %}
-        <p>{{ erro }}</p>
-    {% endif %}
-    <form action="{% url 'login' %}" method="post">
-        {% csrf_token %}
-        <div class="input-group">
-            <div class="input-box">
-                <label for="email">E-mail</label>
-                <input id="email" type="email" name="email" placeholder="Digite seu e-mail" required>
-            </div>
-            <div class="input-box">
-                <label for="password">Senha</label>
-                <input id="password" type="password" name="password" placeholder="Digite sua senha" required>
-            </div>
+    <div class="container">
+        
+        <div class="form-image">
+            <img src="static/assets/img/undraw_shopping_re_hdd9.svg" alt="">
         </div>
-        <button type="submit"><a href="{% url 'habitos' %}">Entrar</a></button>
-    </form>
+        <div class="form">
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                <div class="form-header">
+
+                    <div class="title">
+                        <h1>Login</h1>
+                    </div>
+                    <div class="login-button">
+                        <button><a href="{% url 'login' %}">Entrar</a></button>
+                    </div>
+                    
+                </div>
+
+                    <div class="input-box">
+                        <label for="email">E-mail</label>
+                        <input id="email" type="email" name="email" placeholder="Digite seu e-mail" required>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="password">Senha</label>
+                        <input id="password" type="password" name="password" placeholder="Digite sua senha" required>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
+
 </html>
