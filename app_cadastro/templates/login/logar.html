@@ -10,13 +10,12 @@
 </head>
 
 <body>
-    <div class="container">
-        
+    <div class="container">     
         <div class="form-image">
             <img src="static/assets/img/undraw_shopping_re_hdd9.svg" alt="">
         </div>
         <div class="form">
-            <form action="{% url 'login' %}" method="post">
+            <form action="{% url 'user_login' %}" method="post">
                 {% csrf_token %}
                 <div class="form-header">
 
@@ -24,7 +23,7 @@
                         <h1>Login</h1>
                     </div>
                     <div class="login-button">
-                        <button><a href="{% url 'login' %}">Entrar</a></button>
+                        <button><a href="{% url 'user_login' %}">Entrar</a></button>
                     </div>
                     
                 </div>
@@ -39,8 +38,15 @@
                         <input id="password" type="password" name="password" placeholder="Digite sua senha" required>
                     </div>
 
+                    <a href="{% url 'cadastro' %}" style="text-decoration: none; text-shadow: 3px 3px 5px black;">Não tem conta? Cadastre-se</a>
+
+                    {% if mensagem %}
+                <p style="background-color: red;">{{ mensagem }}</p>
+                {% endif %}
                 </div>
             </form>
+
+
         </div>
     </div>
 </body>

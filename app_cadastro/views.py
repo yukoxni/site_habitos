@@ -1,8 +1,12 @@
 from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Usuario
+
+def home(request):
+    return render(request, 'inicio/home.html')
 
 def cadastro(request):
     if request.method == 'POST':
@@ -20,27 +24,23 @@ def cadastro(request):
         novo_usuario.save()
         
         # Redireciona para alguma página de sucesso
-        return redirect('login')
+        return redirect('user_login')
     
     return render(request, 'cadastros/cadastro.html')
 
-def login_usuario(request):
+def user_login(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         senha = request.POST.get('password')
 
-        # Autentica o usuário
-        usuario = authenticate(request, email=email, password=senha)
-        
-        if usuario is not None:
-            # Autentica e faz login do usuário
-            login(request, usuario)
-            return render(request, 'inicio/index.html')
+        if Usuario.objects.filter(email=email).exists():
+            # Se o email existir, redirecionar para a página 'habito'
+            return redirect('habito')
         else:
-            # Credenciais inválidas, exibir mensagem de erro
-            messages.error(request, 'E-mail ou senha incorretos. Tente novamente.')
-
-    return render(request,'login_usuario/logar.html')
+            mensagem = 'O email {} não está cadastrado.'.format(email)
+            return render(request, 'login/logar.html', {'mensagem': mensagem})
+    
+    return render(request, 'login/logar.html')
 
 def habito(request):
-    return render(request, 'inicio/index.html')
+    return render(request, 'inicio/habitos.html')
